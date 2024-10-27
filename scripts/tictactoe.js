@@ -1,16 +1,21 @@
-var gameBoard = new Array("", "", "", "", "", "", "", "", "");
 var visualGameboard = document.querySelectorAll(".board-piece");
+var gameMessage = document.querySelector("#game-message");
+var playerOneScore = document.querySelector("#playerone-score");
+var playerTwoScore = document.querySelector("#playertwo-score");
+gameMessage.textContent = "Press 'Start' to start!";
+const firstPlayer = new Player("Player 1", "O");
+const secondPlayer = new Player("Player 2", "X");
 /*
 ("0","1","2",
 "3","4","5",
 "6","7","8")
 */
 
-function Player(name, marker, win = false) {
+function Player(name, marker) {
   this.name = name;
   this.marker = marker;
-  this.win = win;
   this.turn = false;
+  this.score = 0;
 
   this.move = function (place) {
     if (
@@ -18,7 +23,6 @@ function Player(name, marker, win = false) {
       place < 10 &&
       !visualGameboard[place].classList.contains("occupied")
     ) {
-      console.log(visualGameboard[place]);
       visualGameboard[place].textContent = this.marker;
       visualGameboard[place].classList.add("occupied");
       this.turn = false;
@@ -33,12 +37,12 @@ function Player(name, marker, win = false) {
   };
 }
 
-function game() {
+function game(playerOne = firstPlayer, playerTwo = secondPlayer) {
+  // Game pre-requisites
   var gameWin = false;
   var currentRound = 0;
-  const playerOne = new Player("Player 1", "O");
-  const playerTwo = new Player("Player 2", "X");
-  console.log(playerOne, playerTwo);
+
+  console.log(playerOne.score, playerTwo.score);
   const winConditions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -50,6 +54,15 @@ function game() {
     [2, 4, 6],
   ];
 
+  const boardUpdate = () => {
+    if (playerOne.turn == true) {
+      gameMessage.textContent = `${playerOne.name}, It's your turn!`;
+    } else {
+      gameMessage.textContent = `${playerTwo.name}, It's your turn!`;
+    }
+    playerOneScore.textContent = `Player One: ${playerOne.score}`;
+    playerTwoScore.textContent = `Player Two: ${playerTwo.score}`;
+  };
   const visualMove = () => {
     visualGameboard.forEach((node) => {
       node.addEventListener("click", () => {
@@ -85,36 +98,36 @@ function game() {
         visualGameboard[pTwo].textContent === playerOne.marker &&
         visualGameboard[pThree].textContent === playerOne.marker
       ) {
-        console.log(
-          `Win found at positions ${pOne + 1},${pTwo + 1},${pThree + 1}`
-        );
         gameWin = true;
-        playerOne.win = true;
-        console.log(`${playerOne.name} wins!`);
+        playerOne.score += 1;
+        gameMessage.textContent = `${playerOne.name} wins!`;
       } else if (
         visualGameboard[pOne].textContent === playerTwo.marker &&
         visualGameboard[pTwo].textContent === playerTwo.marker &&
         visualGameboard[pThree].textContent === playerTwo.marker
       ) {
-        console.log(
-          `Win found at positions ${pOne + 1},${pTwo + 1},${pThree + 1}`
-        );
         gameWin = true;
-        playerTwo.win = true;
-        console.log(`${playerTwo.name} wins!`);
+        playerTwo.score += 1;
+        gameMessage.textContent = `${playerTwo.name} wins!`;
       }
     });
-    if (currentRound > 8) {
+    if (currentRound >= 9 && !gameWin) {
       gameWin = true;
       console.log("It's a tie!");
     }
+    boardUpdate();
     return gameWin;
   };
   const gameStart = () => {
     if (currentRound == 0) {
-      playerOne.turn = true;
+      if (Math.random() == 1) {
+        playerOne.turn = true;
+      } else {
+        playerTwo.turn = true;
+      }
     }
     visualMove();
+
     if (gameWin == true) {
       visualMove(); // disable movement
     }
@@ -123,11 +136,9 @@ function game() {
   gameStart();
 }
 function resetGame() {
-  gameBoard = ["", "", "", "", "", "", "", "", ""];
   visualGameboard.forEach((node) => {
     node.textContent = "";
     node.classList.remove("occupied");
   });
-  console.log(visualGameboard);
-  console.log(gameBoard);
+  console.log("Game reset!");
 }
