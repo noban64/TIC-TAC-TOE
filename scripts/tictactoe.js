@@ -15,6 +15,7 @@ function Player(name, marker) {
   this.name = name;
   this.marker = marker;
   this.turn = false;
+  this.win = false;
   this.score = 0;
 
   this.move = function (place) {
@@ -62,6 +63,12 @@ function game(playerOne = firstPlayer, playerTwo = secondPlayer) {
     }
     playerOneScore.textContent = `Player One: ${playerOne.score}`;
     playerTwoScore.textContent = `Player Two: ${playerTwo.score}`;
+    if (playerOne.win == true){
+        gameMessage.textContent = `${playerOne.name} wins!`;
+    }
+    else if (playerTwo.win == true){
+        gameMessage.textContent = `${playerTwo.name} wins!`;      
+    }
   };
   const visualMove = () => {
     visualGameboard.forEach((node) => {
@@ -98,22 +105,23 @@ function game(playerOne = firstPlayer, playerTwo = secondPlayer) {
         visualGameboard[pTwo].textContent === playerOne.marker &&
         visualGameboard[pThree].textContent === playerOne.marker
       ) {
-        gameWin = true;
-        playerOne.score += 1;
-        gameMessage.textContent = `${playerOne.name} wins!`;
+          playerOne.win = true;
+          playerOne.score += 1;
+          gameWin = true;
       } else if (
         visualGameboard[pOne].textContent === playerTwo.marker &&
         visualGameboard[pTwo].textContent === playerTwo.marker &&
         visualGameboard[pThree].textContent === playerTwo.marker
       ) {
-        gameWin = true;
-        playerTwo.score += 1;
-        gameMessage.textContent = `${playerTwo.name} wins!`;
+
+          playerTwo.win = true;
+          playerTwo.score += 1;
+          gameWin = true;
       }
     });
     if (currentRound >= 9 && !gameWin) {
       gameWin = true;
-      console.log("It's a tie!");
+      gameMessage.textContent = "It's a tie!";
     }
     boardUpdate();
     return gameWin;
@@ -125,6 +133,7 @@ function game(playerOne = firstPlayer, playerTwo = secondPlayer) {
       } else {
         playerTwo.turn = true;
       }
+    boardUpdate();
     }
     visualMove();
 
