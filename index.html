@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.ico" />
     <script src="scripts/tictactoe.js" defer></script>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style.css" />
     <title>Tic-Tac-Toe</title>
-</head>
-<body>
-
-<div id="game-box">
-    <span>Tic-Tac-Toe</span>
-    <div id="game-message"></div>
-    <div id="game-board">
-        <div class="board-piece" value=0></div>
-         <div class="board-piece" value=1></div>
-         <div class="board-piece" value=2></div>
-         <div class="board-piece" value="3"></div>
-         <div class="board-piece" value="4"></div>
-         <div class="board-piece" value="5"></div>
-         <div class="board-piece" value="6"></div>
-         <div class="board-piece" value="7"></div>
-         <div class="board-piece" value="8"></div>
-    </div>
-    <div id="buttons">
+  </head>
+  <body>
+    <div id="game-box">
+      <span>Tic-Tac-Toe</span>
+      <div id="game-message"></div>
+      <div id="game-board">
+        <div class="board-piece" value="0"></div>
+        <div class="board-piece" value="1"></div>
+        <div class="board-piece" value="2"></div>
+        <div class="board-piece" value="3"></div>
+        <div class="board-piece" value="4"></div>
+        <div class="board-piece" value="5"></div>
+        <div class="board-piece" value="6"></div>
+        <div class="board-piece" value="7"></div>
+        <div class="board-piece" value="8"></div>
+      </div>
+      <div id="buttons">
         <button class="function-buttons" onclick="game()">Start</button>
-        <button class="function-buttons" onclick="resetGame()">Reset</button>
-        <button class="function-buttons" onclick="window.location.replace('https://www.amnesty.org/en/latest/campaigns/2022/02/israels-system-of-apartheid/')">Random hehe </button>
+        <button class="function-buttons" onclick="game()">Reset</button>
+        <button
+          class="function-buttons"
+          onclick="window.location.replace('https://www.amnesty.org/en/latest/campaigns/2022/02/israels-system-of-apartheid/')"
+        >
+          Important Info
+        </button>
+      </div>
+      <div id="playerone-score"></div>
+      <div id="playertwo-score"></div>
     </div>
-    <div id="playerone-score"></div>
-    <div id="playertwo-score"></div>
-
-</div>
-    
-</body>
+  </body>
 </html>

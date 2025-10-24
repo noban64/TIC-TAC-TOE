@@ -1,4 +1,3 @@
-"use strict"
 var visualGameboard = document.querySelectorAll(".board-piece");
 var gameMessage = document.querySelector("#game-message");
 var playerOneScore = document.querySelector("#playerone-score");
@@ -64,10 +63,8 @@ function game(playerOne = firstPlayer, playerTwo = secondPlayer) {
       gameMessage.textContent = `${playerOne.name} wins!`;
     } else if (playerTwo.win == true) {
       gameMessage.textContent = `${playerTwo.name} wins!`;
-    }
-    else if (gameWin && !playerOne.win &&!playerTwo.win){
+    } else if (gameWin && !playerOne.win && !playerTwo.win) {
       gameMessage.textContent = "It's a draw!";
-
     }
   };
   const visualMove = () => {
@@ -152,5 +149,5 @@ function resetGame(round = 0) {
   secondPlayer.win = false;
 
   console.log("Game reset!");
-  return round = 0 
+  return round;
 }
