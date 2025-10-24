@@ -29,6 +29,7 @@ body {
   display: grid;
   gap: 1%;
   grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+  max-width:320px;
 }
 #game-board > div {
   background-color: black;
