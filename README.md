@@ -1,1 +1,3 @@
-Tic-Tac-Toe Project from the JS section in the Odin Project -- Can be found at https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/javascript
+# Tic-Tac-Toe
+
+There isn't really much to this. It's Tic-Tac-Toe in the browser haha
